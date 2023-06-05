@@ -40,12 +40,14 @@ INSTALLED_APPS = [
     # my apps
     'main',
     'users',
+    'crud',
     # 3rd party
     'tinymce',
     'fontawesomefree',
     'crispy_forms',
     'crispy_bootstrap4',
     'captcha',
+    'rest_framework',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'

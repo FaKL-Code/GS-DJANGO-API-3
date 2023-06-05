@@ -2,6 +2,8 @@ from django.db import models
 from django.utils import timezone
 from tinymce.models import HTMLField
 from django.contrib.auth import get_user_model
+from django.utils.text import slugify
+from users.models import CustomUser
 
 VOLUME = (
     ('small', 'Small - Under 3Kg'),
@@ -46,6 +48,20 @@ class Doacao(models.Model):
 
     def __str__(self):
         return self.title
+
+    def _get_unique_slug(self):
+        slug = slugify(self.title)
+        unique_slug = slug
+        num = 1
+        while Doacao.objects.filter(doacao_slug=unique_slug).exists():
+            unique_slug = '{}-{}'.format(slug, num)
+            num += 1
+        return unique_slug
+
+    def save(self, *args, **kwargs):
+        if not self.doacao_slug:
+            self.doacao_slug = self._get_unique_slug()
+        super().save(*args, **kwargs)
 
     @property
     def slug(self):

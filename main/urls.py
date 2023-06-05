@@ -1,8 +1,9 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
+
 
 urlpatterns = [
     path('', views.homepage, name="homepage"),
-    path("<series>", views.series, name="series"),
-    path("<series>/<doacao>", views.doacao, name="doacao")
+    path("site/<series>", views.series, name="series"),
+    path("site/<series>/<doacao>", views.doacao, name="doacao")
 ]
