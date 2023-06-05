@@ -1,0 +1,25 @@
+{% extends "main/header.html" %}
+{% block content %}
+    <div class="row display-flex justify-content-start">
+    {% for object in objects %}
+        <div class="col-lg-4 col-md-6 col-sm-12 mobiledevice">
+            <doacao class="media content-section customhover" style="height: 95%;">
+                <div class="media-body">
+                    <a href="/{{object.slug}}">
+                        
+                    </a>
+
+                    <div>
+                        <a class="doacao-title line-clamp-2 title-style" style="font-size: 22px" href="/{{object.slug}}">
+                            {{ object.title }}
+                        </a>
+                        <a href="/{{object.slug}}" style="text-decoration: none;">
+                            <p class="doacao-content line-clamp-5 subtitle-style">{{ object.subtitle }}</p>
+                        </a>
+                    </div>
+                </div>
+            </doacao>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock content %}
