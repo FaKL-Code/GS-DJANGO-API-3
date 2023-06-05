@@ -14,8 +14,11 @@ def homepage(request):
 
 def series(request, series: str):
     if request.user.is_authenticated:
-        matching_series = Doacao.objects.filter(
-            series__slug=series, author=request.user).all()
+        if request.user.is_superuser:
+            matching_series = Doacao.objects.filter(series__slug=series).all()
+        else:
+            matching_series = Doacao.objects.filter(
+                series__slug=series, author=request.user).all()
     else:
         matching_series = None
 
