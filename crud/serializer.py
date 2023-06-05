@@ -10,4 +10,4 @@ class DoacaoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Doacao
-        fields = ['title', 'subtitle', 'endereco', 'series']
+        fields = ['title', 'subtitle', 'endereco', 'series', 'retirada']

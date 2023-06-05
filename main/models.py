@@ -4,6 +4,7 @@ from tinymce.models import HTMLField
 from django.contrib.auth import get_user_model
 from django.utils.text import slugify
 from users.models import CustomUser
+import datetime
 
 VOLUME = (
     ('small', 'Small - Under 3Kg'),
@@ -28,8 +29,6 @@ class DoacaoSeries(models.Model):
         verbose_name_plural = "Series"
         ordering = ['-published']
 
-# Create your models here.
-
 
 class Doacao(models.Model):
     title = models.CharField(max_length=200)
@@ -40,7 +39,8 @@ class Doacao(models.Model):
     doacao_slug = models.SlugField(
         "Doacao Slug", null=False, blank=False, unique=True)
     published = models.DateTimeField("Date published", default=timezone.now())
-    modified = models.DateTimeField("Date modified", default=timezone.now())
+    retirada = models.DateField(
+        "Data de retirada", default=datetime.date.today() + datetime.timedelta(days=1))
     author = models.ForeignKey(
         get_user_model(), default=1, on_delete=models.SET_DEFAULT)
     series = models.ForeignKey(
